@@ -34,11 +34,21 @@ app.get("/", (req, res) => {
 });
 
 app.get("/login.html", (req, res) => {
-  res.sendFile(__dirname + '/public/login.html');
+  try {
+    res.sendFile(__dirname + '/public/login.html');
+  } catch (error) {
+    console.error('Error serving login.html:', error);
+    res.status(500).send('Error loading login page');
+  }
 });
 
 app.get("/register.html", (req, res) => {
-  res.sendFile(__dirname + '/public/register.html');
+  try {
+    res.sendFile(__dirname + '/public/register.html');
+  } catch (error) {
+    console.error('Error serving register.html:', error);
+    res.status(500).send('Error loading register page');
+  }
 });
 
 async function verify(req, res, next) {
