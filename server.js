@@ -36,6 +36,16 @@ app.get("/", (req, res) => {
   res.redirect('/login.html');
 });
 
+// Add explicit route for login.html
+app.get("/login.html", (req, res) => {
+  res.sendFile(__dirname + '/public/login.html');
+});
+
+// Add explicit route for register.html
+app.get("/register.html", (req, res) => {
+  res.sendFile(__dirname + '/public/register.html');
+});
+
 async function verify(req, res, next) {
   const { username, password } = req.query;
   const user = await User.findOne({ username, password });
