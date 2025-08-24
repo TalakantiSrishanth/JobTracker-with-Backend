@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .status-badge {
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-weight: bold;
+    }
+    .pending {
+      background-color: #ffc107;
+      color: #000;
+    }
+    .approved {
+      background-color: #28a745;
+      color: #fff;
+    }
+    .rejected {
+      background-color: #dc3545;
+      color: #fff;
+    }
+  </style>
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <div class="text-center mb-4">
+      <h2>Welcome, <%= user.username %></h2>
+      <h4>Your Job Status</h4>
+    </div>
+
+    <% if (user.tasks.length === 0) { %>
+      <p class="text-muted text-center">You have no tasks yet. Add your first one below.</p>
+    <% } else { %>
+      <ul class="list-group mb-4">
+        <% for (let task of user.tasks) { %>
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div><strong>Company:</strong> <%= task.companyname %></div>
+              <div><strong>Job Title:</strong> <%= task.jobtitle %></div>
+              <div>
+                <strong>Status:</strong> 
+                <span class="status-badge <%= task.status.toLowerCase() %>">
+                  <%= task.status %>
+                </span>
+              </div>
+            </div> 
+            <div>
+              <form action="/tasks/<%= user.id %>/<%= task.id %>/edit" method="GET" class="d-inline">
+                <button class="btn btn-sm btn-outline-primary">Edit</button>
+              </form>
+              <form action="/tasks/<%= user.id %>/<%= task.id %>/delete" method="POST" class="d-inline">
+                <button class="btn btn-sm btn-outline-danger">Delete</button>
+              </form>
+            </div>
+          </li>
+        <% } %>
+      </ul>
+    <% } %>
+
+    <div class="d-flex gap-2">
+      <form action="/dashboard/<%= user.id %>/addtask" method="get">
+        <button type="submit" class="btn btn-success">Add Task</button>
+      </form>
+      <form action="/logout">
+        <button type="submit" class="btn btn-secondary">Logout</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

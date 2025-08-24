@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <style>
+    #register {
+      text-align: center;
+      color: rgb(54, 142, 92);
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body class="bg-light">
+
+  <div class="container d-flex justify-content-center align-items-center rounded" style="min-height: 100vh;">
+    <div class="card p-4" style="width: 100%; max-width: 400px;">
+      <h1 id="register">Register</h1>
+      <form action="/register" method="post">
+        <div class="mb-3">
+          <label for="username" class="form-label">Name</label>
+          <input id="username" type="text" name="username" placeholder="Ram" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input id="password" name="password" type="password" class="form-control" required>
+        </div>
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-success">Submit</button>
+          <button type="button" onclick="window.location.href='/login.html'" class="btn btn-secondary">Back to Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
