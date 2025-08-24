@@ -30,6 +30,12 @@ const User = mongoose.model('User', userSchema);
 app.use(express.static("public"));
 
 app.use(express.urlencoded({ extended: true }));
+
+// Add root route to redirect to login
+app.get("/", (req, res) => {
+  res.redirect('/login.html');
+});
+
 async function verify(req, res, next) {
   const { username, password } = req.query;
   const user = await User.findOne({ username, password });
