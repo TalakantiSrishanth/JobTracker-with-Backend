@@ -27,21 +27,16 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-app.use(express.static("public"));
-
 app.use(express.urlencoded({ extended: true }));
 
-// Add root route to redirect to login
 app.get("/", (req, res) => {
   res.redirect('/login.html');
 });
 
-// Add explicit route for login.html
 app.get("/login.html", (req, res) => {
   res.sendFile(__dirname + '/public/login.html');
 });
 
-// Add explicit route for register.html
 app.get("/register.html", (req, res) => {
   res.sendFile(__dirname + '/public/register.html');
 });
@@ -133,7 +128,12 @@ app.post("/tasks/:id/add", async (req, res) => {
 
 app.get("/logout",(req,res)=>{
     res.redirect('/login.html');
-})
-app.listen(3000,()=>{
-   
 });
+
+module.exports = app;
+
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(3000, () => {
+    console.log('Server running on port 3000');
+  });
+}
